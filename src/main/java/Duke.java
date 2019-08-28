@@ -30,18 +30,9 @@ public class Duke {
                 System.out.println(optionline);
                 System.out.println("Here are the tasks in your list:");
                 for (int i=0;i<Tasklist.size();i++){
-                    String tick = Tasklist.get(i).getStatusIcon();
-                    System.out.println((i+1)+".[" + tick +"] "+ Tasklist.get(i).description);
+                    String time = Tasklist.get(i).toString();
+                    System.out.println((i+1)+"." + time);
                 }
-//                int count = 0;
-//                for (Map.Entry<String,Integer> entry : Hashlist.entrySet()) {
-//                    count++;
-//                    if (entry.getValue() == 0) {
-//                        System.out.println(count + "." + " ["+crossmark+"] " + entry.getKey());
-//                    } else {
-//                        System.out.println(count + "." +" ["+checkmark+"] " + entry.getKey());
-//                    }
-//                }
                 System.out.println(optionline);
             }else if(splitstring[0].equals("done")){
                 System.out.println(optionline);
@@ -49,26 +40,68 @@ public class Duke {
                 for(int i =0 ;i<Tasklist.size();i++){
                     if(i + 1== Integer.parseInt(splitstring[1])){
                         Tasklist.get(i).markAsDone();
-                        String tick = Tasklist.get(i).getStatusIcon();
-                        System.out.println("  ["+tick+"] " + Tasklist.get(i).description);
+                        System.out.println(Tasklist.get(i).toString());
                     }
                 }
-//                int count = 0;
-//                for (Map.Entry<String,Integer> entry : Hashlist.entrySet()) {
-//                    count++;
-//                    if(count == Integer.parseInt(splitstring[1])){
-//                        Hashlist.put(entry.getKey(),1);
-//                        System.out.println(" ["+checkmark+"] "+ entry.getKey());
-//                    }
-//                }
                 System.out.println(optionline);
-            }else {
+            }else if(splitstring[0].equals("deadline")){
+                String description = "";
+                String time = "";
+                int i = 1;
+                while(i<splitstring.length && splitstring[i].charAt(0) !='/'){
+                    description = description + " "+splitstring[i];
+                    i++;
+                }
+                i = i+1;
+                while(i < splitstring.length){
+                    time = time + " "+splitstring[i];
+                    i++;
+                }
                 System.out.println(optionline);
-                System.out.println("added: " + userinput);
-                System.out.println(optionline);
-//                Hashlist.put(userinput,0);
-                Task t = new Task(userinput);
+                System.out.println("Got it. I've added this task:");
+                Task t = new Deadline(description,time,"D");
                 Tasklist.add(t);
+//                System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
+                System.out.println(t.toString());
+                System.out.println("Now you have " +Tasklist.size() +" tasks in the list.");
+                System.out.println(optionline);
+            }else if(splitstring[0].equals("event")){
+                String description = "";
+                String time = "";
+                int i = 1;
+                while(i<splitstring.length && splitstring[i].charAt(0) !='/'){
+                    description = description + " "+splitstring[i];
+                    i++;
+                }
+                i = i+1;
+                while(i < splitstring.length){
+                    time = time + " "+splitstring[i];
+                    i++;
+                }
+                System.out.println(optionline);
+                System.out.println("Got it. I've added this task:");
+                Task t = new Event(description,time,"E");
+                Tasklist.add(t);
+//                System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
+                System.out.println(t.toString());
+                System.out.println("Now you have " +Tasklist.size() +" tasks in the list.");
+                System.out.println(optionline);
+            }else if(splitstring[0].equals("todo")){
+                String description = "";
+                String time = "";
+                int i = 1;
+                while(i<splitstring.length){
+                    description = description + " "+splitstring[i];
+                    i++;
+                }
+                System.out.println(optionline);
+                System.out.println("Got it. I've added this task:");
+                Task t = new Todo(description,time,"T");
+                Tasklist.add(t);
+                //System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
+                System.out.println(t.toString());
+                System.out.println("Now you have " +Tasklist.size() +" tasks in the list.");
+                System.out.println(optionline);
             }
         }
         System.out.println(optionline);
