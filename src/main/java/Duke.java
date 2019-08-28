@@ -12,7 +12,7 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        String optionline = "-----------------------------\n";
+        String optionline = "---------------------------------------\n";
         Scanner input  = new Scanner(System.in);
 //        HashMap<String,Integer> Hashlist = new HashMap<String,Integer>();
         ArrayList<Task> Tasklist = new ArrayList<Task>();
@@ -45,63 +45,106 @@ public class Duke {
                 }
                 System.out.println(optionline);
             }else if(splitstring[0].equals("deadline")){
-                String description = "";
-                String time = "";
-                int i = 1;
-                while(i<splitstring.length && splitstring[i].charAt(0) !='/'){
-                    description = description + " "+splitstring[i];
-                    i++;
-                }
-                i = i+1;
-                while(i < splitstring.length){
-                    time = time + " "+splitstring[i];
-                    i++;
-                }
-                System.out.println(optionline);
-                System.out.println("Got it. I've added this task:");
-                Task t = new Deadline(description,time,"D");
-                Tasklist.add(t);
+                try {
+                    if (splitstring.length == 1) {
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    } else {
+                        String description = "";
+                        String time = "";
+                        int i = 1;
+                        while (i < splitstring.length && splitstring[i].charAt(0) != '/') {
+                            description = description + " " + splitstring[i];
+                            i++;
+                        }
+                        i = i + 1;
+                        while (i < splitstring.length) {
+                            time = time + " " + splitstring[i];
+                            i++;
+                        }
+                        System.out.println(optionline);
+                        System.out.println("Got it. I've added this task:");
+                        Task t = new Deadline(description, time, "D");
+                        Tasklist.add(t);
 //                System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
-                System.out.println(t.toString());
-                System.out.println("Now you have " +Tasklist.size() +" tasks in the list.");
-                System.out.println(optionline);
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + Tasklist.size() + " tasks in the list.");
+                        System.out.println(optionline);
+                    }
+                }catch (DukeException ex){
+                    String temp = "☹ ";
+                    System.out.println(optionline);
+                    System.out.println(temp + ex.getMessage());
+                    System.out.println(optionline);
+                }
             }else if(splitstring[0].equals("event")){
-                String description = "";
-                String time = "";
-                int i = 1;
-                while(i<splitstring.length && splitstring[i].charAt(0) !='/'){
-                    description = description + " "+splitstring[i];
-                    i++;
-                }
-                i = i+1;
-                while(i < splitstring.length){
-                    time = time + " "+splitstring[i];
-                    i++;
-                }
-                System.out.println(optionline);
-                System.out.println("Got it. I've added this task:");
-                Task t = new Event(description,time,"E");
-                Tasklist.add(t);
+                try {
+                    if (splitstring.length == 1) {
+                        throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                    } else {
+                        String description = "";
+                        String time = "";
+                        int i = 1;
+                        while (i < splitstring.length && splitstring[i].charAt(0) != '/') {
+                            description = description + " " + splitstring[i];
+                            i++;
+                        }
+                        i = i + 1;
+                        while (i < splitstring.length) {
+                            time = time + " " + splitstring[i];
+                            i++;
+                        }
+                        System.out.println(optionline);
+                        System.out.println("Got it. I've added this task:");
+                        Task t = new Event(description, time, "E");
+                        Tasklist.add(t);
 //                System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
-                System.out.println(t.toString());
-                System.out.println("Now you have " +Tasklist.size() +" tasks in the list.");
-                System.out.println(optionline);
-            }else if(splitstring[0].equals("todo")){
-                String description = "";
-                String time = "";
-                int i = 1;
-                while(i<splitstring.length){
-                    description = description + " "+splitstring[i];
-                    i++;
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + Tasklist.size() + " tasks in the list.");
+                        System.out.println(optionline);
+                    }
+                }catch (DukeException ex){
+                    String temp = "☹ ";
+                    System.out.println(optionline);
+                    System.out.println(temp + ex.getMessage());
+                    System.out.println(optionline);
                 }
-                System.out.println(optionline);
-                System.out.println("Got it. I've added this task:");
-                Task t = new Todo(description,time,"T");
-                Tasklist.add(t);
-                //System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
-                System.out.println(t.toString());
-                System.out.println("Now you have " +Tasklist.size() +" tasks in the list.");
-                System.out.println(optionline);
+            }else if(splitstring[0].equals("todo")){
+                try {
+                    if (splitstring.length == 1) {
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }else {
+
+                        String description = "";
+                        String time = "";
+                        int i = 1;
+                        while (i < splitstring.length) {
+                            description = description + " " + splitstring[i];
+                            i++;
+                        }
+                        System.out.println(optionline);
+                        System.out.println("Got it. I've added this task:");
+                        Task t = new Todo(description, time, "T");
+                        Tasklist.add(t);
+                        //System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + Tasklist.size() + " tasks in the list.");
+                        System.out.println(optionline);
+                    }
+                }catch (DukeException ex){
+                    String temp = "☹ ";
+                    System.out.println(optionline);
+                    System.out.println(temp + ex.getMessage());
+                    System.out.println(optionline);
+                }
+            }else {
+                try{
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }catch (DukeException ex){
+                    String temp = "☹ " ;
+                    System.out.println(optionline);
+                    System.out.println(temp + ex.getMessage());
+                    System.out.println(optionline);
+                }
             }
         }
         System.out.println(optionline);
