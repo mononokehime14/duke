@@ -113,9 +113,24 @@ public class Duke {
                             i++;
                         }
                         i = i + 1;
+                        boolean flag = false;
+                        int count = 0;
+                        for (int j = 0; j < splitstring[i].length(); j++) {
+                            if (splitstring[i].charAt(j) == '/') {
+                                count++;
+                            }
+                        }
+                        if (count == 2) flag = true;
+
                         while (i < splitstring.length) {
                             time = time + " " + splitstring[i];
                             i++;
+                        }
+                        if(flag){
+                            String[] temptime = time.split(" ");
+                            String[] tempdate = temptime[1].split("/");
+                            Date x = new Date(tempdate[0],tempdate[1],tempdate[2],temptime[2]);
+                            time = x.toString();
                         }
                         System.out.println(optionline);
                         System.out.println("Got it. I've added this task:");
@@ -152,9 +167,24 @@ public class Duke {
                             i++;
                         }
                         i = i + 1;
+                        boolean flag = false;
+                        int count = 0;
+                        for (int j = 0; j < splitstring[i].length(); j++) {
+                            if (splitstring[i].charAt(j) == '/') {
+                                count++;
+                            }
+                        }
+                        if (count == 2) flag = true;
+
                         while (i < splitstring.length) {
                             time = time + " " + splitstring[i];
                             i++;
+                        }
+                        if(flag){
+                            String[] temptime = time.split(" ");
+                            String[] tempdate = temptime[1].split("/");
+                            Date x = new Date(tempdate[0],tempdate[1],tempdate[2],temptime[2]);
+                            time = x.toString();
                         }
                         System.out.println(optionline);
                         System.out.println("Got it. I've added this task:");
