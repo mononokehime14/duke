@@ -2,6 +2,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Duke {
     //level-3 A-Classes
@@ -21,8 +25,47 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(optionline);
         String userinput;
-//        String checkmark  ="\u2713";
-//        String crossmark = "\u2717";
+
+        File checkfile = new File("./docs/tasklist.txt");
+        if(checkfile.exists()){
+            try (Scanner s = new Scanner(new FileReader("./docs/tasklist.txt"))) {
+                while (s.hasNext()) {
+                    String content = s.nextLine();
+                    String[] tempsplit = content.split("/");
+                    String description = tempsplit[2];
+                    String time = tempsplit[0].equals("T") ? "" : tempsplit[3];
+                    String Type = tempsplit[0];
+                    if(Type.equals("T")) {
+                        Task t = new Todo(description, time, Type);
+                        if (tempsplit[1].equals("done")) {
+                            t.markAsDone();
+                        }
+                        Tasklist.add(t);
+                    }else if(Type.equals("D")){
+                        Task t = new Deadline(description, time, Type);
+                        if (tempsplit[1].equals("done")) {
+                            t.markAsDone();
+                        }
+                        Tasklist.add(t);
+                    }else{
+                        Task t = new Event(description, time, Type);
+                        if (tempsplit[1].equals("done")) {
+                            t.markAsDone();
+                        }
+                        Tasklist.add(t);
+                    }
+                }
+            }catch(Exception e){System.out.println(e);}
+        }else{
+            File file = new File("./docs/tasklist.txt");
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("File is created!");
+                }
+            }catch(Exception e){System.out.println(e);}
+
+        }
+
         while(!((userinput=input.nextLine()).equals("bye"))){
             String[] splitstring  = userinput.split(" ");
 
@@ -44,6 +87,19 @@ public class Duke {
                     }
                 }
                 System.out.println(optionline);
+                try {
+                    FileOutputStream outputStream = new FileOutputStream("./docs/tasklist.txt");
+                    for(int i=0;i<Tasklist.size();i++) {
+                        String tempdone = Tasklist.get(i).isDone ? "done" : "notdone";
+                        String outputline = Tasklist.get(i).Type+"/"+tempdone+"/"+ Tasklist.get(i).description + "/"+Tasklist.get(i).time;
+                        byte[] strToBytes = outputline.getBytes();
+                        outputStream.write(strToBytes);
+                        outputStream.write('\n');
+                    }
+                    outputStream.close();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }else if(splitstring[0].equals("deadline")){
                 try {
                     if (splitstring.length == 1) {
@@ -65,7 +121,14 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         Task t = new Deadline(description, time, "D");
                         Tasklist.add(t);
-//                System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
+                        String outputline = "D/"+"notdone/"+ description + "/"+time;
+                        try{
+                            FileOutputStream outputStream = new FileOutputStream("./docs/tasklist.txt", true);
+                            byte[] strToBytes = outputline.getBytes();
+                            outputStream.write(strToBytes);
+                            outputStream.write('\n');
+                            outputStream.close();
+                        }catch(Exception e){System.out.println(e);}
                         System.out.println(t.toString());
                         System.out.println("Now you have " + Tasklist.size() + " tasks in the list.");
                         System.out.println(optionline);
@@ -97,7 +160,14 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         Task t = new Event(description, time, "E");
                         Tasklist.add(t);
-//                System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
+                        String outputline = "E/"+"notdone/"+ description + "/"+time;
+                        try{
+                            FileOutputStream outputStream = new FileOutputStream("./docs/tasklist.txt", true);
+                            byte[] strToBytes = outputline.getBytes();
+                            outputStream.write(strToBytes);
+                            outputStream.write('\n');
+                            outputStream.close();
+                        }catch(Exception e){System.out.println(e);}
                         System.out.println(t.toString());
                         System.out.println("Now you have " + Tasklist.size() + " tasks in the list.");
                         System.out.println(optionline);
@@ -125,8 +195,15 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         Task t = new Todo(description, time, "T");
                         Tasklist.add(t);
-                        //System.out.println("  ["+t.Type+"]["+t.getStatusIcon()+"] " + t.description + " " + t.getTime());
+                        String outputline = "T/"+"notdone/"+ description + "/"+time;;
                         System.out.println(t.toString());
+                        try{
+                            FileOutputStream outputStream = new FileOutputStream("./docs/tasklist.txt", true);
+                            byte[] strToBytes = outputline.getBytes();
+                            outputStream.write(strToBytes);
+                            outputStream.write('\n');
+                            outputStream.close();
+                        }catch(Exception e){System.out.println(e);}
                         System.out.println("Now you have " + Tasklist.size() + " tasks in the list.");
                         System.out.println(optionline);
                     }
