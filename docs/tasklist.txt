@@ -2,4 +2,3 @@ T/notdone/ read book/
 D/done/ return book/ Sunday
 E/notdone/ project meeting/ Mon 2-4pm
 E/notdone/ date with Lin/ Today 9am
-D/notdone/ project level8/ 29th of August 2019, 11:59pm,
