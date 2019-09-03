@@ -66,6 +66,7 @@ public class Duke {
 
         }
 
+
         while(!((userinput=input.nextLine()).equals("bye"))){
             String[] splitstring  = userinput.split(" ");
 
@@ -86,6 +87,38 @@ public class Duke {
                         System.out.println(Tasklist.get(i).toString());
                     }
                 }
+                System.out.println(optionline);
+                try {
+                    FileOutputStream outputStream = new FileOutputStream("./docs/tasklist.txt");
+                    for(int i=0;i<Tasklist.size();i++) {
+                        String tempdone = Tasklist.get(i).isDone ? "done" : "notdone";
+                        String outputline = Tasklist.get(i).Type+"/"+tempdone+"/"+ Tasklist.get(i).description + "/"+Tasklist.get(i).time;
+                        byte[] strToBytes = outputline.getBytes();
+                        outputStream.write(strToBytes);
+                        outputStream.write('\n');
+                    }
+                    outputStream.close();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }else if(splitstring[0].equals("delete")){
+                int removeindex=0;
+                System.out.println(optionline);
+                System.out.println("Noted. I've removed this task: ");
+                for(int i =0 ;i<Tasklist.size();i++){
+                    if(i + 1== Integer.parseInt(splitstring[1])){
+                        removeindex = i;
+                        System.out.println(Tasklist.get(i).toString());
+                    }
+                }
+                boolean loopflag = true;
+                for(int i =0 ;i<Tasklist.size() && loopflag;i++){
+                    if(removeindex == i){
+                        loopflag = false;
+                        Tasklist.remove(removeindex);
+                    }
+                }
+                System.out.println("Now you have "+Tasklist.size()+" tasks in the list.");
                 System.out.println(optionline);
                 try {
                     FileOutputStream outputStream = new FileOutputStream("./docs/tasklist.txt");
