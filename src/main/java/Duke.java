@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Duke {
-    //level-3 A-Classes
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -18,7 +17,6 @@ public class Duke {
 //        System.out.println("Hello from\n" + logo);
         String optionline = "---------------------------------------\n";
         Scanner input  = new Scanner(System.in);
-//        HashMap<String,Integer> Hashlist = new HashMap<String,Integer>();
         ArrayList<Task> Tasklist = new ArrayList<Task>();
         System.out.println(optionline);
         System.out.println("Hello! I'm Duke");
@@ -78,6 +76,27 @@ public class Duke {
                     System.out.println((i+1)+"." + time);
                 }
                 System.out.println(optionline);
+            }else if(splitstring[0].equals("find")){
+                String keyword = splitstring[1];
+                ArrayList<Task> searchlist = new ArrayList<Task>();
+                for(int i=0;i<Tasklist.size();i++){
+                    String tempdescription[] = Tasklist.get(i).description.split(" ");
+                    boolean tempflag = true;
+                    for(int j=0;j<tempdescription.length && tempflag;j++){
+                        if(tempdescription[j].equals(keyword)){
+                            searchlist.add(Tasklist.get(i));
+                            tempflag = false;
+                        }
+                    }
+                }
+                System.out.println(optionline);
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i=0;i<searchlist.size();i++){
+                    String time = searchlist.get(i).toString();
+                    System.out.println((i+1)+"." + time);
+                }
+                System.out.println(optionline);
+                searchlist.clear();
             }else if(splitstring[0].equals("done")){
                 System.out.println(optionline);
                 System.out.println("Nice! I've marked this task as done: ");
