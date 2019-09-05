@@ -35,6 +35,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./docs/tasklist.txt").run();
+        String currentpath = System.getProperty("user.dir");
+        new Duke(currentpath + "/docs/tasklist.txt").run();
     }
 }
