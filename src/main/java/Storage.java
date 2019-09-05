@@ -13,7 +13,7 @@ public class Storage {
 
     public ArrayList<Task> load(){
         ArrayList<Task> temp = new ArrayList<Task>();
-        File checkfile = new File("./docs/tasklist.txt");
+        File checkfile = new File(filepath);
         if(checkfile.exists()){
             try (Scanner s = new Scanner(new FileReader(filepath))) {
                 while (s.hasNext()) {
@@ -44,7 +44,7 @@ public class Storage {
                 }
             }catch(Exception e){System.out.println(e);}
         }else {
-            File file = new File("./docs/tasklist.txt");
+            File file = new File(filepath);
             try {
                 if (file.createNewFile()) {
                     System.out.println("File is created!");
@@ -57,7 +57,7 @@ public class Storage {
     }
     public void save(Tasklist tasks){
         try {
-            FileOutputStream outputStream = new FileOutputStream("./docs/tasklist.txt");
+            FileOutputStream outputStream = new FileOutputStream(filepath);
             for (int i = 0; i < tasks.datalist.size(); i++) {
                 String tempdone = tasks.datalist.get(i).isDone ? "done" : "notdone";
                 String outputline = tasks.datalist.get(i).Type + "/" + tempdone + "/" + tasks.datalist.get(i).description + "/" + tasks.datalist.get(i).time;

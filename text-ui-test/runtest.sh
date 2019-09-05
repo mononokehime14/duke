@@ -13,7 +13,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred /Users/apple/desktop/
-if ! javac -cp /Users/apple/desktop/Duke -Xlint:none -d ../bin /Users/apple/desktop/Duke/src/main/java/*.java
+if ! javac -cp ../src  -Xlint:none -d ../bin ../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1

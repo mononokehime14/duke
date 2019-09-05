@@ -8,5 +8,4 @@ T/notdone/  discuss debate/
 E/notdone/ discuss love/ today 10-12pm
 D/done/ discuss issue/ tomorrow 7am
 D/notdone/ chicken eat/ Sunday
-E/notdone/ darkness ends/ this Thursday 4pm
-T/notdone/  cooking dinner/
+T/done/  cooking dinner/

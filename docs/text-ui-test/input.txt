@@ -1,4 +1,0 @@
-list
-find book
-find project
-bye
