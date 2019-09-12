@@ -3,7 +3,6 @@
  */
 public class AddCommand extends Command {
     /**
-     *
      * @param Type the type of the command(deadline/todo/event)
      * @param content the name and time of the newly added (deadline/todo/event)
      */
