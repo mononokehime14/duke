@@ -1,3 +1,6 @@
+/**
+ * The command class provide basic features of commands, storing them by type and content and then execute function
+ */
 public class Command {
     public String Type;
     public String content;

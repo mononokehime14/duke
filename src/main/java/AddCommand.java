@@ -1,7 +1,16 @@
+/**
+ * This class deals with all commands that are adding event/deadline/todo into the taskslist
+ */
 public class AddCommand extends Command {
+    /**
+     *
+     * @param Type the type of the command(deadline/todo/event)
+     * @param content the name and time of the newly added (deadline/todo/event)
+     */
     public AddCommand(String Type, String content){
         super(Type,content);
     }
+
     public void addDeadline(Tasklist tasks, Storage storage){
         String[] splitcontent = content.split(" ");
         try {
