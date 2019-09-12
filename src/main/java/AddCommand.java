@@ -11,6 +11,11 @@ public class AddCommand extends Command {
         super(Type,content);
     }
 
+    /**
+     * This addDeadline function deals with deadline command and add a new deadline int to the tasklist as well as the storage
+     * @param tasks
+     * @param storage
+     */
     public void addDeadline(Tasklist tasks, Storage storage){
         String[] splitcontent = content.split(" ");
         try {
@@ -57,6 +62,12 @@ public class AddCommand extends Command {
             System.out.println(temp + ex.getMessage());
         }
     }
+
+    /**
+     * This addEvent function deals with Event command and add a new event to the taskslist as well as the storage
+     * @param tasks
+     * @param storage
+     */
     public void addEvent(Tasklist tasks, Storage storage){
         String[] splitcontent = content.split(" ");
         try {
@@ -104,6 +115,12 @@ public class AddCommand extends Command {
             System.out.println(temp + ex.getMessage());
         }
     }
+
+    /**
+     * This addTodo function deals with todo command and add a new todo into the taskslist as well as the storage
+     * @param tasks
+     * @param storage
+     */
     public void addTodo(Tasklist tasks, Storage storage){
         String[] splitcontent = content.split(" ");
         try {

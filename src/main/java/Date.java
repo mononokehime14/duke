@@ -1,15 +1,30 @@
+/**
+ * Date class takes in String inout of "xx/xx/xxxx,xxxx" type, and print our in written form.
+ */
 public class Date {
     protected int Day;
     protected int Month;
     protected String Year;
     protected int Time;
 
+    /**
+     * Constructor function Date takes in four Strings from user-input, store them.
+     * @param Day
+     * @param Month
+     * @param Year
+     * @param Time
+     */
     public Date(String Day,String Month,String Year,String Time){
         this.Day = Integer.parseInt(Day);
         this.Month  = Integer.parseInt(Month);
         this.Year = Year;
         this.Time = Integer.parseInt(Time);
     }
+
+    /**
+     * toString function base on the four strings of date and time, convert into verbal from and displays.
+     * @return String of the written form output that is ready to be printed out.
+     */
     public String toString(){
         String day = Integer.toString(Day);
         if(Day % 10 == 1) {

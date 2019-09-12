@@ -1,3 +1,7 @@
+/**
+ * Storage class deals with the output txt file, open,update,save the file.
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileOutputStream;
@@ -7,10 +11,19 @@ import java.io.FileReader;
 public class Storage {
     String filepath;
 
+    /**
+     * Storage constructor method takes in the path of the txtfile, providing directory for following methods.
+     * @param filepath
+     */
     public Storage(String filepath){
         this.filepath = filepath;
     }
 
+    /**
+     * load function open the txt file when the programme is initialized.
+     * Read and track if there is tasks in the txt file, if has, read it and store in an arraylist.
+     * @return arraylist that contains all tasks that are already existed in the txt file.
+     */
     public ArrayList<Task> load(){
         ArrayList<Task> temp = new ArrayList<Task>();
         File checkfile = new File(filepath);
@@ -55,6 +68,12 @@ public class Storage {
         }
         return temp;
     }
+
+    /**
+     * save method saves updates of the tasklist after markdone and deleting certain tasks.
+     * It uses current tasklist to overwrite existing tasklist in the txt file.
+     * @param tasks
+     */
     public void save(Tasklist tasks){
         try {
             FileOutputStream outputStream = new FileOutputStream(filepath);
@@ -70,6 +89,12 @@ public class Storage {
             System.out.println(e);
         }
     }
+
+    /**
+     * add method updates the tasks in the txt file after add command is executed.
+     * It shoes exception if updating failed.
+     * @param outputline
+     */
     public void add(String outputline){
         try{
             FileOutputStream outputStream = new FileOutputStream(filepath, true);

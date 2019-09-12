@@ -1,7 +1,23 @@
+/**
+ * DeleteCommand class inherit from command class, store the delete command.
+ * It accomplishes actual deleting on the tasklist as well as inside the output file.
+ */
 public class DeleteCommand extends Command{
+    /**
+     * DeleteCommand constructor function takes in two strings from the user-input, store information of type and content in the command class.
+     * @param Type
+     * @param content
+     */
     public DeleteCommand(String Type,String content){
         super(Type,content);
     }
+
+    /**
+     * execute function removes a task in the tasklist as well as in the output file in storage.
+     * displays the deleted message.
+     * @param tasks
+     * @param storage
+     */
     public void execute(Tasklist tasks,Storage storage){
         int removeindex=0;
         String[] splitcontent = content.split(" ");
